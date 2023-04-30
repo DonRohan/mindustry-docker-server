@@ -1,0 +1,23 @@
+version: '3.5'
+services:
+  mindustry:
+    build: 
+      context: .
+      args:
+        - MINDUSTRY_VERSION=v143.1
+    image: mindustry
+    container_name: mindustry
+
+    restart: unless-stopped
+
+    # enable tty and stdin to make `docker attach` work
+    tty: true
+    stdin_open: true
+
+    ports:
+      - "6567:6567/udp"
+      - "6567:6567/tcp"
+
+    # map config to host machine
+    volumes:
+      - ./config:/config
